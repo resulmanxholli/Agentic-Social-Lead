@@ -5,6 +5,14 @@ class KeywordService {
     const doc = new Keyword({ keyword, cron });
     return doc.save();
   }
+
+  getKeywords() {
+    return Keyword.find();
+  }
+
+  setEnabled(id: string, enabled: boolean) {
+    return Keyword.findByIdAndUpdate(id, { enabled }, { new: true });
+  }
 }
 
 export const keywordService = new KeywordService();
