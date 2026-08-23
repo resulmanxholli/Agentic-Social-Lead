@@ -1,0 +1,341 @@
+{
+  "posts": [
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al",
+      "postId": "914827301156402",
+      "pageName": "shtepiajote.al",
+      "url": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0",
+      "time": "2026-08-19T09:15:00.000Z",
+      "timestamp": 1787130900,
+      "user": {
+        "id": "48213907765412",
+        "name": "Shtëpia Jote",
+        "profileUrl": "https://www.facebook.com/48213907765412",
+        "profilePic": "https://placehold.co/96x96/png?text=SJ"
+      },
+      "collaborators": [],
+      "text": "🏡 Apartament 2+1 në zonën e Ish-Bllokut, kat i 4-t, i mobiluar plotësisht.\n\n📐 85 m² | 🛏️ 2 dhoma gjumi | 🚗 Parking privat\n\n💬 Na shkruani në inbox për detaje dhe vizitë.",
+      "likes": 41,
+      "comments": 9,
+      "shares": 3,
+      "topReactionsCount": 4,
+      "media": [
+        {
+          "thumbnail": "https://placehold.co/600x400/png?text=Apartament+2%2B1",
+          "__typename": "Photo",
+          "__isMedia": "Photo",
+          "photo_image": {
+            "uri": "https://placehold.co/1080x1080/png?text=Apartament+2%2B1",
+            "height": 1080,
+            "width": 1080
+          },
+          "url": "https://www.facebook.com/photo/?fbid=914827301100402",
+          "id": "914827301100402",
+          "ocrText": "Apartament 2+1 - Ish-Blloku"
+        }
+      ],
+      "feedbackId": "ZmVlZGJhY2s6OTE0ODI3MzAxMTU2NDAy",
+      "reactionLikeCount": 38,
+      "reactionLoveCount": 3,
+      "paidPartnership": false,
+      "topComments": [
+        {
+          "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0?comment_id=771402839156",
+          "commentId": "771402839156",
+          "id": "Y29tbWVudDo5MTQ4MjczMDExNTY0MDJfNzcxNDAyODM5MTU2",
+          "feedbackId": "ZmVlZGJhY2s6OTE0ODI3MzAxMTU2NDAyXzc3MTQwMjgzOTE1Ng==",
+          "date": "2026-08-19T09:41:12.000Z",
+          "text": "Sa është qeraja mujore dhe a pranoni qera afatgjatë?",
+          "author": {
+            "__typename": "User",
+            "id": "100078213456901",
+            "name": "Ardit Krasniqi",
+            "__isActor": "User",
+            "gender": "MALE",
+            "__isEntity": "User",
+            "url": "https://www.facebook.com/ardit.krasniqi.94",
+            "work_info": null,
+            "is_verified": false,
+            "short_name": "Ardit",
+            "subscribe_status": "CANNOT_SUBSCRIBE"
+          },
+          "profileUrl": "https://www.facebook.com/ardit.krasniqi.94",
+          "profilePicture": "https://placehold.co/64x64/png?text=AK",
+          "profileId": "100078213456901",
+          "profileName": "Ardit Krasniqi",
+          "likesCount": "1",
+          "threadingDepth": 0
+        }
+      ],
+      "topLevelUrl": "https://www.facebook.com/48213907765412/posts/914827301156402",
+      "facebookId": "48213907765412",
+      "pageAdLibrary": {
+        "id": "601938275610044",
+        "pamv_comms_data": null
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al",
+      "postId": "914755318097600",
+      "pageName": "shtepiajote.al",
+      "url": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd",
+      "time": "2026-08-17T14:02:30.000Z",
+      "timestamp": 1786975350,
+      "user": {
+        "id": "48213907765412",
+        "name": "Shtëpia Jote",
+        "profileUrl": "https://www.facebook.com/48213907765412",
+        "profilePic": "https://placehold.co/96x96/png?text=SJ"
+      },
+      "collaborators": [],
+      "text": "🏢 Zyrë me qira në qendër të Tiranës, ideale për startup ose ekip të vogël.\n\n📐 45 m² | 🌐 Internet fiber i përfshirë | 🅿️ 1 vend parkimi\n\n📩 Kontaktoni për çmim dhe orar vizite.",
+      "likes": 15,
+      "shares": 1,
+      "topReactionsCount": 2,
+      "media": [
+        {
+          "thumbnail": "https://placehold.co/600x400/png?text=Zyre+Qendra",
+          "__typename": "Photo",
+          "is_playable": false,
+          "image": {
+            "uri": "https://placehold.co/900x600/png?text=Zyre+Qendra",
+            "height": 600,
+            "width": 900
+          },
+          "id": "914755318050600",
+          "__isMedia": "Photo",
+          "ocrText": "Zyre me qira - Qendra e Tiranes"
+        }
+      ],
+      "feedbackId": "ZmVlZGJhY2s6OTE0NzU1MzE4MDk3NjAw",
+      "reactionLikeCount": 15,
+      "paidPartnership": false,
+      "topLevelUrl": "https://www.facebook.com/48213907765412/posts/914755318097600",
+      "facebookId": "48213907765412",
+      "pageAdLibrary": {
+        "id": "601938275610044",
+        "pamv_comms_data": null
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al",
+      "postId": "914612044566100",
+      "pageName": "shtepiajote.al",
+      "url": "https://www.facebook.com/shtepiajote.al/posts/pfbid03Qs6TuVwXz9Ab2Cd5Ef8Gh1Ij4Kl7Mn0Op3Qr6St9Uv2Wx5Yz8Ab1Cd4Ef7Gh",
+      "time": "2026-08-14T11:20:00.000Z",
+      "timestamp": 1786698000,
+      "user": {
+        "id": "48213907765412",
+        "name": "Shtëpia Jote",
+        "profileUrl": "https://www.facebook.com/48213907765412",
+        "profilePic": "https://placehold.co/96x96/png?text=SJ"
+      },
+      "collaborators": [],
+      "text": "Këshillë e shpejtë: kur po shihni një apartament, kontrolloni gjithmonë faturat e fundit të energjisë dhe ujit përpara se të nënshkruani kontratën.\n\nÇfarë tjetër kontrolloni ju para se të merrni me qira? 👇",
+      "likes": 27,
+      "shares": 4,
+      "topReactionsCount": 3,
+      "media": [],
+      "feedbackId": "ZmVlZGJhY2s6OTE0NjEyMDQ0NTY2MTAw",
+      "reactionLikeCount": 24,
+      "reactionLoveCount": 3,
+      "paidPartnership": false,
+      "topLevelUrl": "https://www.facebook.com/48213907765412/posts/914612044566100",
+      "facebookId": "48213907765412",
+      "pageAdLibrary": {
+        "id": "601938275610044",
+        "pamv_comms_data": null
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al"
+    }
+  ],
+  "isPostRelevant": true,
+  "lead": {
+    "fullName": "Ardit Krasniqi",
+    "jobTitle": "Product Manager",
+    "companyName": "Nova Tech Solutions",
+    "intentScore": 82,
+    "intentReasoning": "Commenter directly asked about monthly rent and long-term lease terms on an apartment listing, indicating active, near-term rental intent rather than casual browsing."
+  },
+  "comments": [
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0?comment_id=771402839156",
+      "commentId": "771402839156",
+      "id": "Y29tbWVudDo5MTQ4MjczMDExNTY0MDJfNzcxNDAyODM5MTU2",
+      "feedbackId": "ZmVlZGJhY2s6OTE0ODI3MzAxMTU2NDAyXzc3MTQwMjgzOTE1Ng==",
+      "date": "2026-08-19T09:41:12.000Z",
+      "text": "Sa është qeraja mujore dhe a pranoni qera afatgjatë?",
+      "author": {
+        "__typename": "User",
+        "id": "100078213456901",
+        "name": "Ardit Krasniqi",
+        "__isActor": "User",
+        "gender": "MALE",
+        "is_verified": false,
+        "short_name": "Ardit",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/ardit.krasniqi.94",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/ardit.krasniqi.94",
+      "profilePicture": "https://placehold.co/64x64/png?text=AK",
+      "profileId": "100078213456901",
+      "profileName": "Ardit Krasniqi",
+      "likesCount": "1",
+      "threadingDepth": 0,
+      "facebookId": "914827301156402",
+      "postTitle": "🏡 Apartament 2+1 në zonën e Ish-Bllokut, kat i 4-t, i mobiluar plotësisht.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0?comment_id=771409922481",
+      "commentId": "771409922481",
+      "id": "Y29tbWVudDo5MTQ4MjczMDExNTY0MDJfNzcxNDA5OTIyNDgx",
+      "feedbackId": "ZmVlZGJhY2s6OTE0ODI3MzAxMTU2NDAyXzc3MTQwOTkyMjQ4MQ==",
+      "date": "2026-08-19T10:05:47.000Z",
+      "text": "Bukur! A ka ashensor pallati?",
+      "author": {
+        "__typename": "User",
+        "id": "100065339812207",
+        "name": "Griselda Hoxha",
+        "__isActor": "User",
+        "gender": "FEMALE",
+        "is_verified": false,
+        "short_name": "Griselda",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/griselda.hoxha.71",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/griselda.hoxha.71",
+      "profilePicture": "https://placehold.co/64x64/png?text=GH",
+      "profileId": "100065339812207",
+      "profileName": "Griselda Hoxha",
+      "likesCount": "0",
+      "threadingDepth": 0,
+      "facebookId": "914827301156402",
+      "postTitle": "🏡 Apartament 2+1 në zonën e Ish-Bllokut, kat i 4-t, i mobiluar plotësisht.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0?comment_id=771415667390",
+      "commentId": "771415667390",
+      "id": "Y29tbWVudDo5MTQ4MjczMDExNTY0MDJfNzcxNDE1NjY3Mzkw",
+      "feedbackId": "ZmVlZGJhY2s6OTE0ODI3MzAxMTU2NDAyXzc3MTQxNTY2NzM5MA==",
+      "date": "2026-08-19T11:22:03.000Z",
+      "text": "Vetëm duke shikuar 👀",
+      "author": {
+        "__typename": "User",
+        "id": "100011224987650",
+        "name": "Dorian Meta",
+        "__isActor": "User",
+        "gender": "MALE",
+        "is_verified": false,
+        "short_name": "Dorian",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/dorian.meta.52",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/dorian.meta.52",
+      "profilePicture": "https://placehold.co/64x64/png?text=DM",
+      "profileId": "100011224987650",
+      "profileName": "Dorian Meta",
+      "likesCount": "0",
+      "threadingDepth": 0,
+      "facebookId": "914827301156402",
+      "postTitle": "🏡 Apartament 2+1 në zonën e Ish-Bllokut, kat i 4-t, i mobiluar plotësisht.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid02Kj9nRmwTgVbXo4Lz7hQeYw3aB6dC1eF8gH2iJ5kL9mN3oP6qR8sT1uV4wX7yZ0"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd?comment_id=771201558822",
+      "commentId": "771201558822",
+      "id": "Y29tbWVudDo5MTQ3NTUzMTgwOTc2MDBfNzcxMjAxNTU4ODIy",
+      "feedbackId": "ZmVlZGJhY2s6OTE0NzU1MzE4MDk3NjAwXzc3MTIwMTU1ODgyMg==",
+      "date": "2026-08-17T15:10:09.000Z",
+      "text": "A lejohet regjistrimi i biznesit në këtë adresë?",
+      "author": {
+        "__typename": "User",
+        "id": "100033459210817",
+        "name": "Elton Braha",
+        "__isActor": "User",
+        "gender": "MALE",
+        "is_verified": false,
+        "short_name": "Elton",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/elton.braha.33",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/elton.braha.33",
+      "profilePicture": "https://placehold.co/64x64/png?text=EB",
+      "profileId": "100033459210817",
+      "profileName": "Elton Braha",
+      "likesCount": "2",
+      "commentsCount": 1,
+      "comments": [],
+      "threadingDepth": 0,
+      "facebookId": "914755318097600",
+      "postTitle": "🏢 Zyrë me qira në qendër të Tiranës, ideale për startup ose ekip të vogël.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid03Qs6TuVwXz9Ab2Cd5Ef8Gh1Ij4Kl7Mn0Op3Qr6St9Uv2Wx5Yz8Ab1Cd4Ef7Gh",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid03Qs6TuVwXz9Ab2Cd5Ef8Gh1Ij4Kl7Mn0Op3Qr6St9Uv2Wx5Yz8Ab1Cd4Ef7Gh?comment_id=770998341265",
+      "commentId": "770998341265",
+      "id": "Y29tbWVudDo5MTQ2MTIwNDQ1NjYxMDBfNzcwOTk4MzQxMjY1",
+      "feedbackId": "ZmVlZGJhY2s6OTE0NjEyMDQ0NTY2MTAwXzc3MDk5ODM0MTI2NQ==",
+      "date": "2026-08-14T12:03:55.000Z",
+      "text": "Unë kontrolloj gjithmonë nëse ka rrjedhje uji në banjo dhe nën lavaman.",
+      "author": {
+        "__typename": "User",
+        "id": "100022187754390",
+        "name": "Manjola Sina",
+        "__isActor": "User",
+        "gender": "FEMALE",
+        "is_verified": false,
+        "short_name": "Manjola",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/manjola.sina.8",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/manjola.sina.8",
+      "profilePicture": "https://placehold.co/64x64/png?text=MS",
+      "profileId": "100022187754390",
+      "profileName": "Manjola Sina",
+      "likesCount": "3",
+      "threadingDepth": 0,
+      "facebookId": "914612044566100",
+      "postTitle": "Këshillë e shpejtë: kur po shihni një apartament, kontrolloni gjithmonë faturat e fundit.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid03Qs6TuVwXz9Ab2Cd5Ef8Gh1Ij4Kl7Mn0Op3Qr6St9Uv2Wx5Yz8Ab1Cd4Ef7Gh"
+    }
+  ]
+}
