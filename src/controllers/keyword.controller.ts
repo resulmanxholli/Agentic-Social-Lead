@@ -9,6 +9,9 @@ const createKeywordSchema = z.object({
   cron: z.string().refine(cron.validate, {
     message: "cron must be a valid cron expression",
   }),
+  targetUrls: z
+    .array(z.string().url())
+    .min(1, "targetUrls must contain at least one URL"),
 });
 
 export async function createKeywordController(req: Request, res: Response) {
@@ -20,10 +23,17 @@ export async function createKeywordController(req: Request, res: Response) {
       .json({ error: parsed.error.issues[0]?.message ?? "Invalid request" });
   }
 
-  const { keyword, cron: cronExpression } = parsed.data;
+  const { keyword, cron: cronExpression, targetUrls } = parsed.data;
 
   try {
-    const created = await keywordService.createKeyword(keyword, cronExpression);
+    const created = await keywordService.createKeyword(keyword, cronExpression, targetUrls);
+    if (created.enabled) {
+      keywordService.scheduleKeyword({
+        id: created._id.toString(),
+        keyword: created.keyword,
+        cron: created.cron,
+      });
+    }
     return res.status(201).json(created);
   } catch (err: any) {
     if (err.code === 11000) {
@@ -73,7 +83,11 @@ export async function updateKeywordController(req: Request, res: Response) {
   }
 
   if (updated.enabled) {
-    schedulerService.scheduleKeyword({ keyword: updated.keyword, cron: updated.cron });
+    keywordService.scheduleKeyword({
+      id: updated._id.toString(),
+      keyword: updated.keyword,
+      cron: updated.cron,
+    });
   } else {
     schedulerService.disableSchedule(updated.keyword);
   }

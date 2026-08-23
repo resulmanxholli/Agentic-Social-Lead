@@ -31,19 +31,8 @@ class SchedulerService {
     delete this.schedules[keywordName];
   }
 
-  scheduleKeyword({ keyword, cron: cronExpression }: { keyword: string; cron: string }) {
-    this.createSchedule({ keyword, cron: cronExpression }, () => {
-      // Facebook search/scrape logic goes here — pluggable, not implemented yet
-    });
-  }
+
 }
 
 export const schedulerService = new SchedulerService();
 
-export async function startScheduler() {
-  const activeKeywords = await Keyword.find({ enabled: true });
-
-  for (const keywordDoc of activeKeywords) {
-    schedulerService.scheduleKeyword({ keyword: keywordDoc.keyword, cron: keywordDoc.cron });
-  }
-}
