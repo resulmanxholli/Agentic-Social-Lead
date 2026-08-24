@@ -36,19 +36,32 @@ class DeduplicationService {
     }
   }
 
-  async filterNewComments(comments: FacebookComment[]) {
-    const commentIds = comments
+  async filterNewComments(comments: FacebookComment[], keyword: string) {
+    const keywordWords = keyword
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((word) => word.length >= 3);
+
+    const keywordMatched = comments.filter((comment) => {
+      if (typeof comment.text !== "string" || comment.text.trim().length < 10) {
+        return false;
+      }
+      const text = comment.text.toLowerCase();
+      return keywordWords.some((word) => text.includes(word));
+    });
+
+    const commentIds = keywordMatched
       .map((comment) => comment.commentId)
       .filter((id): id is string => Boolean(id));
 
-    if (commentIds.length === 0) return comments;
+    if (commentIds.length === 0) return keywordMatched;
 
     const existing = await Comment.find({ commentId: { $in: commentIds } }).select(
       "commentId",
     );
     const seenCommentIds = new Set(existing.map((c) => c.commentId));
 
-    return comments.filter(
+    return keywordMatched.filter(
       (comment) => !comment.commentId || !seenCommentIds.has(comment.commentId),
     );
   }
@@ -73,7 +86,7 @@ class DeduplicationService {
     }
   }
 
-  async filterNewLeadsFromComments(comments: FacebookComment[]) {
+  async filterNewLeadsFromComments(comments: FacebookComment[], keyword: string) {
     const profileIds = comments
       .map((comment) => comment.author?.id)
       .filter((id): id is string => Boolean(id));
@@ -83,11 +96,12 @@ class DeduplicationService {
     const existingLeads = await Lead.find({
       platform: "facebook",
       profileId: { $in: profileIds },
+      keyword,
     }).select("profileId");
     const seenProfileIds = new Set(existingLeads.map((lead) => lead.profileId));
 
     return comments.filter(
-      (post) => post.author?.id && !seenProfileIds.has(post.author.id),
+      (comment) => comment.author?.id && !seenProfileIds.has(comment.author.id),
     );
   }
 }

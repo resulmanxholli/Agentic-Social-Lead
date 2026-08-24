@@ -40,15 +40,21 @@ class KeywordService {
 
       const newPosts = await deduplicationService.filterNewPosts(posts);
 
-      const relevantPosts = await this.qualifyPosts(newPosts, keywordDoc.keyword);
+      await this.qualifyPosts(newPosts, keywordDoc.keyword);
 
-      const comments = await apifyService.scrapePostsComments(relevantPosts);
+      const comments = await apifyService.scrapePostsComments(newPosts);
 
-      const newComments = await deduplicationService.filterNewComments(comments);
-      const fileteredComments = await deduplicationService.filterNewLeadsFromComments(newComments);
+      const newComments = await deduplicationService.filterNewComments(
+        comments,
+        keywordDoc.keyword,
+      );
+      const fileteredComments = await deduplicationService.filterNewLeadsFromComments(
+        newComments,
+        keywordDoc.keyword,
+      );
       const qualifiedLeads = await this.qualifyComments(fileteredComments, keywordDoc.keyword);
 
-      const savedLeads = await leadService.saveLeadsFromComments(qualifiedLeads);
+      const savedLeads = await leadService.saveLeadsFromComments(qualifiedLeads, keywordDoc.keyword);
 
     } catch (err) {
       console.error(`[keywordService] executeKeyword failed for keyword ${keywordId}`, err);
@@ -87,6 +93,11 @@ class KeywordService {
         const lead = await qualificationService.qualifyComment(comment, keyword);
         await deduplicationService.recordComment(comment, Boolean(lead));
         if (lead) {
+          try {
+            Object.assign(lead, await qualificationService.enrichLead(lead));
+          } catch (err) {
+            console.error(`[keywordService] enrichment failed for a lead`, err);
+          }
           qualified.push({ comment, lead });
         }
       } catch (err) {

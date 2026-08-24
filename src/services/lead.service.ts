@@ -1,8 +1,12 @@
 import { Lead } from "../db/models/lead.js";
 import type { FacebookComment, FacebookPost, QualifiedLead } from "./types.js";
+import { webhookService } from "./webhook.service.js";
 
 class LeadService {
-  async saveLeads(qualified: Array<{ post: FacebookPost; lead: QualifiedLead }>) {
+  async saveLeads(
+    qualified: Array<{ post: FacebookPost; lead: QualifiedLead }>,
+    keyword: string,
+  ) {
     const saved = [];
 
     for (const { post, lead } of qualified) {
@@ -14,15 +18,24 @@ class LeadService {
           platform: "facebook",
           profileId,
           profileUrl: `https://www.facebook.com/${profileId}`,
+          keyword,
           fullName: lead.fullName,
           ...(lead.jobTitle ? { jobTitle: lead.jobTitle } : {}),
           ...(lead.companyName ? { companyName: lead.companyName } : {}),
+          ...(lead.location ? { location: lead.location } : {}),
+          ...(lead.email ? { email: lead.email } : {}),
+          ...(lead.phone ? { phone: lead.phone } : {}),
+          ...(lead.companyWebsite ? { companyWebsite: lead.companyWebsite } : {}),
           triggerContext: post.text ?? "",
           sourceUrl: post.url ?? "",
+          ...(post.pageName ? { pageName: post.pageName } : {}),
+          interactionType: "author",
+          interactionAt: post.time ? new Date(post.time) : new Date(),
           intentScore: lead.intentScore,
           intentReasoning: lead.intentReasoning,
         });
         saved.push(doc);
+        await webhookService.pushLead(doc);
       } catch (err: any) {
         if (err.code === 11000) {
           continue;
@@ -36,6 +49,7 @@ class LeadService {
 
   async saveLeadsFromComments(
     qualified: Array<{ comment: FacebookComment; lead: QualifiedLead }>,
+    keyword: string,
   ) {
     const saved = [];
 
@@ -51,15 +65,24 @@ class LeadService {
             typeof comment.profileUrl === "string"
               ? comment.profileUrl
               : `https://www.facebook.com/${profileId}`,
+          keyword,
           fullName: lead.fullName,
           ...(lead.jobTitle ? { jobTitle: lead.jobTitle } : {}),
           ...(lead.companyName ? { companyName: lead.companyName } : {}),
+          ...(lead.location ? { location: lead.location } : {}),
+          ...(lead.email ? { email: lead.email } : {}),
+          ...(lead.phone ? { phone: lead.phone } : {}),
+          ...(lead.companyWebsite ? { companyWebsite: lead.companyWebsite } : {}),
           triggerContext: comment.text ?? "",
           sourceUrl: comment.commentUrl ?? comment.facebookUrl ?? "",
+          ...(comment.pageName ? { pageName: comment.pageName } : {}),
+          interactionType: "commenter",
+          interactionAt: comment.date ? new Date(comment.date) : new Date(),
           intentScore: lead.intentScore,
           intentReasoning: lead.intentReasoning,
         });
         saved.push(doc);
+        await webhookService.pushLead(doc);
       } catch (err: any) {
         if (err.code === 11000) {
           continue;

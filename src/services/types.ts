@@ -2,6 +2,8 @@ export interface FacebookPost {
   postId?: string;
   text?: string;
   url?: string;
+  time?: string;
+  pageName?: string;
   user?: {
     id?: string;
     name?: string;
@@ -18,6 +20,7 @@ export interface FacebookComment {
   commentUrl?: string;
   threadingDepth?: number;
   facebookUrl?: string;
+  pageName?: string;
   author?: {
     id?: string;
     name?: string;
@@ -40,6 +43,10 @@ export interface QualifiedLead {
   fullName: string;
   jobTitle?: string;
   companyName?: string;
+  location?: string;
+  email?: string;
+  phone?: string;
+  companyWebsite?: string;
   intentScore: number;
   intentReasoning: string;
 }

@@ -4,11 +4,42 @@ import type { FacebookComment, FacebookPost, ScrapeOptions, CommentScrapeOptions
 
 const ACTOR_ID = "apify/facebook-posts-scraper";
 const COMMENTS_ACTOR_ID = "apify/facebook-comments-scraper";
+const MIN_SPACING_MS = 5000;
 
+class RateLimitedQueue {
+  private pending: Array<() => void> = [];
+  private active = 0;
+  private lastStartedAt = 0;
 
+  constructor(
+    private readonly concurrency: number,
+    private readonly minSpacingMs: number,
+  ) {}
+
+  async run<T>(fn: () => Promise<T>): Promise<T> {
+    if (this.active >= this.concurrency) {
+      await new Promise<void>((resolve) => this.pending.push(resolve));
+    }
+
+    const wait = this.minSpacingMs - (Date.now() - this.lastStartedAt);
+    if (wait > 0) {
+      await new Promise((resolve) => setTimeout(resolve, wait));
+    }
+
+    this.active++;
+    this.lastStartedAt = Date.now();
+    try {
+      return await fn();
+    } finally {
+      this.active--;
+      this.pending.shift()?.();
+    }
+  }
+}
 
 class ApifyService {
   private isTesting = process.env.DO_NOT_SEND_API_REQUEST === "true";
+  private requestQueue = new RateLimitedQueue(1, MIN_SPACING_MS);
   private getClient(): ApifyClient {
     const token = process.env.APIFY_API_TOKEN;
     if (!token) {
@@ -32,11 +63,13 @@ class ApifyService {
 
     const client = this.getClient();
 
-    const run = await client.actor(ACTOR_ID).call({
-      startUrls: targetUrls.map((url) => ({ url })),
-      resultsLimit: options.resultsLimit,
-      onlyPostsNewerThan: options.onlyPostsNewerThan,
-    });
+    const run = await this.requestQueue.run(() =>
+      client.actor(ACTOR_ID).call({
+        startUrls: targetUrls.map((url) => ({ url })),
+        resultsLimit: options.resultsLimit,
+        onlyPostsNewerThan: options.onlyPostsNewerThan,
+      }),
+    );
 
     console.log(
       `[apifyService] Run finished with status "${run.status}", dataset ${run.defaultDatasetId}`,
@@ -80,12 +113,14 @@ class ApifyService {
 
     const client = this.getClient();
 
-    const run = await client.actor(COMMENTS_ACTOR_ID).call({
-      startUrls: postUrls.map((url) => ({ url })),
-      resultsLimit: options.resultsLimit,
-      onlyCommentsNewerThan: options.onlyCommentsNewerThan,
-      includeNestedComments: options.includeNestedComments,
-    });
+    const run = await this.requestQueue.run(() =>
+      client.actor(COMMENTS_ACTOR_ID).call({
+        startUrls: postUrls.map((url) => ({ url })),
+        resultsLimit: options.resultsLimit,
+        onlyCommentsNewerThan: options.onlyCommentsNewerThan,
+        includeNestedComments: options.includeNestedComments,
+      }),
+    );
 
     console.log(
       `[apifyService] Comments run finished with status "${run.status}", dataset ${run.defaultDatasetId}`,
@@ -95,9 +130,20 @@ class ApifyService {
 
     console.log(`[apifyService] Raw comments dataset (${items.length} item(s)):`, items);
 
-    const filtered = (items as FacebookComment[]).filter(
-      (comment) => typeof comment.text === "string" && comment.text.trim().length > 0,
+    const pageNameByUrl = new Map(
+      posts
+        .filter((post): post is FacebookPost & { url: string } => typeof post.url === "string")
+        .map((post) => [post.url, post.pageName]),
     );
+
+    const filtered = (items as FacebookComment[])
+      .filter((comment) => typeof comment.text === "string" && comment.text.trim().length > 0)
+      .map((comment) => {
+        const pageName =
+          comment.pageName ??
+          (typeof comment.facebookUrl === "string" ? pageNameByUrl.get(comment.facebookUrl) : undefined);
+        return pageName ? { ...comment, pageName } : comment;
+      });
 
     console.log(
       `[apifyService] ${filtered.length} comment(s) with real text after filtering`,
