@@ -83,6 +83,14 @@ class QualificationService {
     return new GoogleGenAI({ apiKey });
   }
 
+  private hashToRange(seed: string, min: number, max: number): number {
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) {
+      hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+    }
+    return min + (Math.abs(hash) % (max - min + 1));
+  }
+
   private parseRetryDelayMs(err: any): number | null {
     try {
       const body = JSON.parse(err.message);
@@ -157,7 +165,10 @@ class QualificationService {
     minIntentScore: number,
   ): Promise<QualifiedLead | null> {
     if (this.isTesting) {
-      return DUMMY_DATA.lead;
+      const fullName = comment.author?.name ?? comment.profileName ?? DUMMY_DATA.lead.fullName;
+      const seed = comment.commentId ?? comment.text ?? fullName;
+      const intentScore = this.hashToRange(seed, 40, 95);
+      return { ...DUMMY_DATA.lead, fullName, intentScore };
     }
     const client = this.getClient();
 

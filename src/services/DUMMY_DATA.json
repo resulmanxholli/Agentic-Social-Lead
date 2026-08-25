@@ -149,6 +149,84 @@
         "pamv_comms_data": null
       },
       "inputUrl": "https://www.facebook.com/shtepiajote.al"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al",
+      "postId": "915103877200811",
+      "pageName": "shtepiajote.al",
+      "url": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij",
+      "time": "2026-08-22T08:30:00.000Z",
+      "timestamp": 1787380200,
+      "user": {
+        "id": "48213907765412",
+        "name": "Shtëpia Jote",
+        "profileUrl": "https://www.facebook.com/48213907765412",
+        "profilePic": "https://placehold.co/96x96/png?text=SJ"
+      },
+      "collaborators": [],
+      "text": "🏘️ Vilë private në Fresk, 3 kate, oborr 300 m², e re, gati për banim.\n\n📐 320 m² | 🛏️ 5 dhoma gjumi | 🚗 2 vende parkimi | 🌳 Kopsht privat\n\n💬 Shkruani për çmim dhe vizitë sot.",
+      "likes": 63,
+      "comments": 12,
+      "shares": 7,
+      "topReactionsCount": 6,
+      "media": [
+        {
+          "thumbnail": "https://placehold.co/600x400/png?text=Vile+Fresk",
+          "__typename": "Photo",
+          "__isMedia": "Photo",
+          "photo_image": {
+            "uri": "https://placehold.co/1080x1080/png?text=Vile+Fresk",
+            "height": 1080,
+            "width": 1080
+          },
+          "url": "https://www.facebook.com/photo/?fbid=915103877150811",
+          "id": "915103877150811",
+          "ocrText": "Vile private - Fresk"
+        }
+      ],
+      "feedbackId": "ZmVlZGJhY2s6OTE1MTAzODc3MjAwODEx",
+      "reactionLikeCount": 55,
+      "reactionLoveCount": 8,
+      "paidPartnership": false,
+      "topLevelUrl": "https://www.facebook.com/48213907765412/posts/915103877200811",
+      "facebookId": "48213907765412",
+      "pageAdLibrary": {
+        "id": "601938275610044",
+        "pamv_comms_data": null
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al",
+      "postId": "914990156633209",
+      "pageName": "shtepiajote.al",
+      "url": "https://www.facebook.com/shtepiajote.al/posts/pfbid06Kl9Mn2Op5Qr8St1Uv4Wx7Yz0Ab3Cd6Ef9Gh2Ij5Kl8Mn1Op4Qr7St0Uv3Wx6Yz",
+      "time": "2026-08-21T16:45:00.000Z",
+      "timestamp": 1787323500,
+      "user": {
+        "id": "48213907765412",
+        "name": "Shtëpia Jote",
+        "profileUrl": "https://www.facebook.com/48213907765412",
+        "profilePic": "https://placehold.co/96x96/png?text=SJ"
+      },
+      "collaborators": [],
+      "text": "Faleminderit të gjithëve për urimet e ditëlindjes së faqes sonë! 🎉 5 vite bashkë duke gjetur shtëpinë e duhur për ju.",
+      "likes": 98,
+      "comments": 20,
+      "shares": 2,
+      "topReactionsCount": 10,
+      "media": [],
+      "feedbackId": "ZmVlZGJhY2s6OTE0OTkwMTU2NjMzMjA5",
+      "reactionLikeCount": 90,
+      "reactionLoveCount": 8,
+      "paidPartnership": false,
+      "topLevelUrl": "https://www.facebook.com/48213907765412/posts/914990156633209",
+      "facebookId": "48213907765412",
+      "pageAdLibrary": {
+        "id": "601938275610044",
+        "pamv_comms_data": null
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al"
     }
   ],
   "isPostRelevant": true,
@@ -336,6 +414,133 @@
         "id": "601938275610044"
       },
       "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid03Qs6TuVwXz9Ab2Cd5Ef8Gh1Ij4Kl7Mn0Op3Qr6St9Uv2Wx5Yz8Ab1Cd4Ef7Gh"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij?comment_id=772011456830",
+      "commentId": "772011456830",
+      "id": "Y29tbWVudDo5MTUxMDM4NzcyMDA4MTFfNzcyMDExNDU2ODMw",
+      "feedbackId": "ZmVlZGJhY2s6OTE1MTAzODc3MjAwODExXzc3MjAxMTQ1NjgzMA==",
+      "date": "2026-08-22T09:12:40.000Z",
+      "text": "Jam shumë i interesuar, a mund të organizojmë një vizitë këtë javë? Kam buxhet gati.",
+      "author": {
+        "__typename": "User",
+        "id": "100045221390876",
+        "name": "Blerim Sadiku",
+        "__isActor": "User",
+        "gender": "MALE",
+        "is_verified": false,
+        "short_name": "Blerim",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/blerim.sadiku.19",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/blerim.sadiku.19",
+      "profilePicture": "https://placehold.co/64x64/png?text=BS",
+      "profileId": "100045221390876",
+      "profileName": "Blerim Sadiku",
+      "likesCount": "2",
+      "threadingDepth": 0,
+      "facebookId": "915103877200811",
+      "postTitle": "🏘️ Vilë private në Fresk, 3 kate, oborr 300 m², e re, gati për banim.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij?comment_id=772018834471",
+      "commentId": "772018834471",
+      "id": "Y29tbWVudDo5MTUxMDM4NzcyMDA4MTFfNzcyMDE4ODM0NDcx",
+      "feedbackId": "ZmVlZGJhY2s6OTE1MTAzODc3MjAwODExXzc3MjAxODgzNDQ3MQ==",
+      "date": "2026-08-22T10:03:15.000Z",
+      "text": "Bukur 😍",
+      "author": {
+        "__typename": "User",
+        "id": "100019887345213",
+        "name": "Enkeleda Rama",
+        "__isActor": "User",
+        "gender": "FEMALE",
+        "is_verified": false,
+        "short_name": "Enkeleda",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/enkeleda.rama.62",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/enkeleda.rama.62",
+      "profilePicture": "https://placehold.co/64x64/png?text=ER",
+      "profileId": "100019887345213",
+      "profileName": "Enkeleda Rama",
+      "likesCount": "0",
+      "threadingDepth": 0,
+      "facebookId": "915103877200811",
+      "postTitle": "🏘️ Vilë private në Fresk, 3 kate, oborr 300 m², e re, gati për banim.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij?comment_id=772025671209",
+      "commentId": "772025671209",
+      "id": "Y29tbWVudDo5MTUxMDM4NzcyMDA4MTFfNzcyMDI1NjcxMjA5",
+      "feedbackId": "ZmVlZGJhY2s6OTE1MTAzODc3MjAwODExXzc3MjAyNTY3MTIwOQ==",
+      "date": "2026-08-22T11:47:02.000Z",
+      "text": "Ju kontaktoj në privat për detaje pune, jemi agjenci imobiliare dhe duam bashkëpunim.",
+      "profileUrl": "https://www.facebook.com/imoteam.partners",
+      "profilePicture": "https://placehold.co/64x64/png?text=IP",
+      "profileId": "100078654321099",
+      "profileName": "Imo Team Partners",
+      "likesCount": "0",
+      "threadingDepth": 0,
+      "facebookId": "915103877200811",
+      "postTitle": "🏘️ Vilë private në Fresk, 3 kate, oborr 300 m², e re, gati për banim.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid09Tv2WxYz5Ab8Cd1Ef4Gh7Ij0Kl3Mn6Op9Qr2St5Uv8Wx1Yz4Ab7Cd0Ef3Gh6Ij"
+    },
+    {
+      "facebookUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd",
+      "commentUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd?comment_id=771208873305",
+      "commentId": "771208873305",
+      "id": "Y29tbWVudDo5MTQ3NTUzMTgwOTc2MDBfNzcxMjA4ODczMzA1",
+      "feedbackId": "ZmVlZGJhY2s6OTE0NzU1MzE4MDk3NjAwXzc3MTIwODg3MzMwNQ==",
+      "date": "2026-08-17T16:30:44.000Z",
+      "text": "Jemi një startup 6-vetësh dhe po kërkojmë saktësisht diçka të tillë, na dërgoni çmimin mujor dhe kushtet e kontratës ju lutem.",
+      "author": {
+        "__typename": "User",
+        "id": "100056781234567",
+        "name": "Sara Dervishi",
+        "__isActor": "User",
+        "gender": "FEMALE",
+        "is_verified": false,
+        "short_name": "Sara",
+        "subscribe_status": "CANNOT_SUBSCRIBE",
+        "__isEntity": "User",
+        "url": "https://www.facebook.com/sara.dervishi.41",
+        "work_info": null
+      },
+      "profileUrl": "https://www.facebook.com/sara.dervishi.41",
+      "profilePicture": "https://placehold.co/64x64/png?text=SD",
+      "profileId": "100056781234567",
+      "profileName": "Sara Dervishi",
+      "likesCount": "1",
+      "threadingDepth": 0,
+      "facebookId": "914755318097600",
+      "postTitle": "🏢 Zyrë me qira në qendër të Tiranës, ideale për startup ose ekip të vogël.",
+      "pageAdLibrary": {
+        "is_business_page_active": false,
+        "id": "601938275610044"
+      },
+      "inputUrl": "https://www.facebook.com/shtepiajote.al/posts/pfbid07Nm3pQrTsUvWx5Yz8Ab1Cd4Ef7Gh0Ij3Kl6Mn9Op2Qr5St8Uv1Wx4Yz7Ab0Cd"
     }
   ]
 }
