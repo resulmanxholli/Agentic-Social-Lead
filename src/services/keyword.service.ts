@@ -6,10 +6,22 @@ import { qualificationService } from "./llm.service.js";
 import { deduplicationService } from "./deduplication.service.js";
 import { leadService } from "./lead.service.js";
 
+const POST_WATCH_WINDOW_DAYS = Number(process.env.POST_WATCH_WINDOW_DAYS) || 7;
+
 class KeywordService {
   
-  createKeyword(keyword: string, cron: string, targetUrls: string[]) {
-    const doc = new Keyword({ keyword, cron, targetUrls });
+  createKeyword(
+    keyword: string,
+    cron: string,
+    targetUrls: string[],
+    minIntentScore?: number,
+  ) {
+    const doc = new Keyword({
+      keyword,
+      cron,
+      targetUrls,
+      ...(minIntentScore !== undefined ? { minIntentScore } : {}),
+    });
     return doc.save();
   }
 
@@ -23,7 +35,13 @@ class KeywordService {
 
   updateKeyword(
     id: string,
-    updates: { keyword?: string; cron?: string; enabled?: boolean; targetUrls?: string[] },
+    updates: {
+      keyword?: string;
+      cron?: string;
+      enabled?: boolean;
+      targetUrls?: string[];
+      minIntentScore?: number;
+    },
   ) {
     return Keyword.findByIdAndUpdate(id, updates, { new: true });
   }
@@ -33,28 +51,54 @@ class KeywordService {
       const keywordDoc = await Keyword.findById(keywordId);
       if (!keywordDoc) return;
 
-      const posts = await apifyService.scrapeFacebookPosts(keywordDoc.targetUrls);
-
-      keywordDoc.lastScrapedAt = new Date();
-      await keywordDoc.save();
-
-      const newPosts = await deduplicationService.filterNewPosts(posts);
-
-      await this.qualifyPosts(newPosts, keywordDoc.keyword);
-
-      const comments = await apifyService.scrapePostsComments(newPosts);
-
-      const newComments = await deduplicationService.filterNewComments(
-        comments,
-        keywordDoc.keyword,
+      const posts = await apifyService.scrapeFacebookPosts(
+        keywordDoc.targetUrls,
+        keywordDoc.lastScrapedAt
+          ? { onlyPostsNewerThan: keywordDoc.lastScrapedAt.toISOString() }
+          : {},
       );
+
+      const newPosts = await deduplicationService.filterNewPosts(posts, keywordDoc.keyword);
+
+      const watchCutoff = new Date(Date.now() - POST_WATCH_WINDOW_DAYS * 24 * 60 * 60 * 1000);
+      const previouslyWatchedPosts = await deduplicationService.getWatchedPosts(
+        keywordDoc.keyword,
+        watchCutoff,
+      );
+
+      const relevantPosts = await this.qualifyPosts(newPosts, keywordDoc.keyword);
+
+      const previouslyWatchedAsFacebookPosts: FacebookPost[] = previouslyWatchedPosts.map(
+        (post) => ({
+          postId: post.postId,
+          url: post.url,
+          text: post.text,
+          time: post.postedAt.toISOString(),
+          ...(post.pageName ? { pageName: post.pageName } : {}),
+        }),
+      );
+
+      const sweepTargets = [...relevantPosts, ...previouslyWatchedAsFacebookPosts];
+
+      const comments = await apifyService.scrapePostsComments(sweepTargets);
+
+      const newComments = await deduplicationService.filterNewComments(comments, keywordDoc.keyword);
       const fileteredComments = await deduplicationService.filterNewLeadsFromComments(
         newComments,
         keywordDoc.keyword,
       );
-      const qualifiedLeads = await this.qualifyComments(fileteredComments, keywordDoc.keyword);
+      const qualifiedLeads = await this.qualifyComments(
+        fileteredComments,
+        keywordDoc.keyword,
+        keywordDoc.minIntentScore,
+      );
 
       const savedLeads = await leadService.saveLeadsFromComments(qualifiedLeads, keywordDoc.keyword);
+
+      await deduplicationService.recordCommentSweep(sweepTargets, keywordDoc.keyword, watchCutoff);
+
+      keywordDoc.lastScrapedAt = new Date();
+      await keywordDoc.save();
 
     } catch (err) {
       console.error(`[keywordService] executeKeyword failed for keyword ${keywordId}`, err);
@@ -86,19 +130,22 @@ class KeywordService {
     return relevant;
   }
 
-  async qualifyComments(comments: FacebookComment[], keyword: string) {
+  async qualifyComments(comments: FacebookComment[], keyword: string, minIntentScore: number) {
     const qualified: Array<{ comment: FacebookComment; lead: QualifiedLead }> = [];
     for (const comment of comments) {
       try {
-        const lead = await qualificationService.qualifyComment(comment, keyword);
-        await deduplicationService.recordComment(comment, Boolean(lead));
+        const lead = await qualificationService.qualifyComment(comment, keyword, minIntentScore);
+        await deduplicationService.recordComment(comment, keyword, Boolean(lead));
         if (lead) {
+          let enrichedLead = lead;
           try {
-            Object.assign(lead, await qualificationService.enrichLead(lead));
+            const profileUrl =
+              typeof comment.profileUrl === "string" ? comment.profileUrl : undefined;
+            enrichedLead = { ...lead, ...(await qualificationService.enrichLead(lead, profileUrl)) };
           } catch (err) {
             console.error(`[keywordService] enrichment failed for a lead`, err);
           }
-          qualified.push({ comment, lead });
+          qualified.push({ comment, lead: enrichedLead });
         }
       } catch (err) {
         console.error(`[keywordService] qualification failed for a comment`, err);

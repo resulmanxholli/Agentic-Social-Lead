@@ -2,6 +2,7 @@ import { Schema, model, Document } from "mongoose";
 
 export interface CommentDocument extends Document {
   commentId: string;
+  keyword: string;
   postUrl?: string;
   authorId?: string;
   text: string;
@@ -12,6 +13,7 @@ export interface CommentDocument extends Document {
 
 const CommentSchema = new Schema<CommentDocument>({
   commentId: { type: String, required: true },
+  keyword: { type: String, required: true },
   postUrl: String,
   authorId: String,
   text: String,
@@ -20,6 +22,6 @@ const CommentSchema = new Schema<CommentDocument>({
   processedAt: { type: Date, default: Date.now },
 });
 
-CommentSchema.index({ commentId: 1 }, { unique: true });
+CommentSchema.index({ commentId: 1, keyword: 1 }, { unique: true });
 
 export const Comment = model<CommentDocument>("Comment", CommentSchema);

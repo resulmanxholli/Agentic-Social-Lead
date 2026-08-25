@@ -45,16 +45,29 @@ class RequestQueue {
 
   constructor(private readonly concurrency: number) {}
 
+  // Hands the freed slot directly to the next waiter instead of decrementing `active` and
+  // letting it be re-claimed by whoever calls run() next: decrementing here would leave a
+  // window, between this resolve() and the queued waiter's async function actually resuming,
+  // where a fresh caller could see a stale "slot free" count and slip in alongside it.
+  private release() {
+    const next = this.pending.shift();
+    if (next) {
+      next();
+    } else {
+      this.active--;
+    }
+  }
+
   async run<T>(fn: () => Promise<T>): Promise<T> {
     if (this.active >= this.concurrency) {
       await new Promise<void>((resolve) => this.pending.push(resolve));
+    } else {
+      this.active++;
     }
-    this.active++;
     try {
       return await fn();
     } finally {
-      this.active--;
-      this.pending.shift()?.();
+      this.release();
     }
   }
 }
@@ -141,6 +154,7 @@ class QualificationService {
   async qualifyComment(
     comment: FacebookComment,
     keyword: string,
+    minIntentScore: number,
   ): Promise<QualifiedLead | null> {
     if (this.isTesting) {
       return DUMMY_DATA.lead;
@@ -172,14 +186,9 @@ class QualificationService {
 
     const parsed = QualificationSchema.parse(JSON.parse(raw));
 
-    if (!parsed.isRelevant) {
+    if (!parsed.isRelevant || parsed.intentScore < minIntentScore) {
       return null;
     }
-
-    // TODO: CHECK THE SCORE
-    // if (parsed.intentScore < 50) {
-    //   return null;
-    // }
 
     return {
       fullName: parsed.fullName,
@@ -193,8 +202,9 @@ class QualificationService {
 
   async enrichLead(
     lead: QualifiedLead,
+    profileUrl?: string,
   ): Promise<{ email?: string; phone?: string; companyWebsite?: string }> {
-    if (this.isTesting || !lead.companyName) {
+    if (this.isTesting) {
       return {};
     }
     const client = this.getClient();
@@ -204,16 +214,20 @@ class QualificationService {
         client.models.generateContent({
           model: "gemini-3.6-flash",
           contents:
-            `Full name: "${lead.fullName}"\n` +
-            `Company: "${lead.companyName}"` +
-            (lead.jobTitle ? `\nJob title: "${lead.jobTitle}"` : ""),
+            `Full name: "${lead.fullName}"` +
+            (lead.companyName ? `\nCompany: "${lead.companyName}"` : "") +
+            (lead.jobTitle ? `\nJob title: "${lead.jobTitle}"` : "") +
+            (lead.location ? `\nLocation: "${lead.location}"` : "") +
+            (profileUrl ? `\nProfile URL: "${profileUrl}"` : ""),
           config: {
             systemInstruction:
-              "You research public contact information for a sales team's lead. Use web search to find the " +
-              "company's official website and any publicly listed business email or phone number for this " +
-              "person or their company. Only report what search actually surfaces — never guess, infer, or " +
-              "construct an email, phone number, or website you did not find. Respond in exactly this format, " +
-              "one line per field, using NONE for anything you could not find:\n" +
+              "You research public contact information for a sales team's lead — a real person who may or may " +
+              "not have an associated company. Use web search to find the best publicly available contact " +
+              "information for this specific person: a personal or business email, a phone number, and a website " +
+              "(their company's if they have one, otherwise a personal or professional page such as a business " +
+              "listing or LinkedIn). Only report what search actually surfaces — never guess, infer, or construct " +
+              "an email, phone number, or website you did not find. Respond in exactly this format, one line per " +
+              "field, using NONE for anything you could not find:\n" +
               "WEBSITE: <url or NONE>\nEMAIL: <email or NONE>\nPHONE: <phone or NONE>",
             tools: [{ googleSearch: {} }],
           },

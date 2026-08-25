@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 export type Platform = 'facebook';
-export type InteractionType = 'commenter' | 'author';
+export type InteractionType = 'commenter';
 
 export interface LeadDocument {
   platform: Platform;
@@ -40,7 +40,7 @@ const leadSchema = new Schema<LeadDocument>({
   triggerContext: { type: String, required: true },
   sourceUrl: { type: String, required: true },
   pageName: String,
-  interactionType: { type: String, enum: ['commenter', 'author'], required: true },
+  interactionType: { type: String, enum: ['commenter'], required: true },
   interactionAt: { type: Date, required: true },
   intentScore: { type: Number, required: true },
   intentReasoning: { type: String, required: true },

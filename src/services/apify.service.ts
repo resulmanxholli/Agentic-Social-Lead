@@ -16,9 +16,20 @@ class RateLimitedQueue {
     private readonly minSpacingMs: number,
   ) {}
 
+  private release() {
+    const next = this.pending.shift();
+    if (next) {
+      next();
+    } else {
+      this.active--;
+    }
+  }
+
   async run<T>(fn: () => Promise<T>): Promise<T> {
     if (this.active >= this.concurrency) {
       await new Promise<void>((resolve) => this.pending.push(resolve));
+    } else {
+      this.active++;
     }
 
     const wait = this.minSpacingMs - (Date.now() - this.lastStartedAt);
@@ -26,13 +37,11 @@ class RateLimitedQueue {
       await new Promise((resolve) => setTimeout(resolve, wait));
     }
 
-    this.active++;
     this.lastStartedAt = Date.now();
     try {
       return await fn();
     } finally {
-      this.active--;
-      this.pending.shift()?.();
+      this.release();
     }
   }
 }

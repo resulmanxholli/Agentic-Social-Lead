@@ -6,6 +6,10 @@ export interface PostDocument extends Document {
   text: string;
   url: string;
   isRelevant: boolean;
+  postedAt: Date;
+  pageName?: string;
+  watching: boolean;
+  lastCommentSweepAt?: Date;
   processedAt: Date;
 }
 
@@ -15,9 +19,14 @@ const PostSchema = new Schema<PostDocument>({
   text: String,
   url: String,
   isRelevant: { type: Boolean, required: true },
+  postedAt: { type: Date, required: true },
+  pageName: String,
+  watching: { type: Boolean, default: false },
+  lastCommentSweepAt: { type: Date },
   processedAt: { type: Date, default: Date.now },
 });
 
-PostSchema.index({ postId: 1 }, { unique: true });
+PostSchema.index({ postId: 1, keyword: 1 }, { unique: true });
+PostSchema.index({ keyword: 1, watching: 1, postedAt: 1 });
 
 export const Post = model<PostDocument>("Post", PostSchema);
