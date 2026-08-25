@@ -6,8 +6,6 @@ import { qualificationService } from "./llm.service.js";
 import { deduplicationService } from "./deduplication.service.js";
 import { leadService } from "./lead.service.js";
 
-const POST_WATCH_WINDOW_DAYS = Number(process.env.POST_WATCH_WINDOW_DAYS) || 7;
-
 class KeywordService {
   
   createKeyword(
@@ -58,33 +56,12 @@ class KeywordService {
           : {},
       );
 
-      const newPosts = await deduplicationService.filterNewPosts(posts, keywordDoc.keyword);
+      const relevantPosts = await this.qualifyPosts(posts, keywordDoc.keyword);
 
-      const watchCutoff = new Date(Date.now() - POST_WATCH_WINDOW_DAYS * 24 * 60 * 60 * 1000);
-      const previouslyWatchedPosts = await deduplicationService.getWatchedPosts(
-        keywordDoc.keyword,
-        watchCutoff,
-      );
+      const comments = await apifyService.scrapePostsComments(relevantPosts);
 
-      const relevantPosts = await this.qualifyPosts(newPosts, keywordDoc.keyword);
-
-      const previouslyWatchedAsFacebookPosts: FacebookPost[] = previouslyWatchedPosts.map(
-        (post) => ({
-          postId: post.postId,
-          url: post.url,
-          text: post.text,
-          time: post.postedAt.toISOString(),
-          ...(post.pageName ? { pageName: post.pageName } : {}),
-        }),
-      );
-
-      const sweepTargets = [...relevantPosts, ...previouslyWatchedAsFacebookPosts];
-
-      const comments = await apifyService.scrapePostsComments(sweepTargets);
-
-      const newComments = await deduplicationService.filterNewComments(comments, keywordDoc.keyword);
       const fileteredComments = await deduplicationService.filterNewLeadsFromComments(
-        newComments,
+        comments,
         keywordDoc.keyword,
       );
       const qualifiedLeads = await this.qualifyComments(
@@ -93,9 +70,7 @@ class KeywordService {
         keywordDoc.minIntentScore,
       );
 
-      const savedLeads = await leadService.saveLeadsFromComments(qualifiedLeads, keywordDoc.keyword);
-
-      await deduplicationService.recordCommentSweep(sweepTargets, keywordDoc.keyword, watchCutoff);
+      await leadService.saveLeadsFromComments(qualifiedLeads, keywordDoc.keyword);
 
       keywordDoc.lastScrapedAt = new Date();
       await keywordDoc.save();
@@ -118,7 +93,6 @@ class KeywordService {
     for (const post of posts) {
       try {
         const isRelevant = await qualificationService.qualifyPost(post, keyword);
-        await deduplicationService.recordPost(post, keyword, isRelevant);
         if (isRelevant) {
           relevant.push(post);
         }
@@ -135,7 +109,6 @@ class KeywordService {
     for (const comment of comments) {
       try {
         const lead = await qualificationService.qualifyComment(comment, keyword, minIntentScore);
-        await deduplicationService.recordComment(comment, keyword, Boolean(lead));
         if (lead) {
           let enrichedLead = lead;
           try {
