@@ -6,7 +6,7 @@ class SchedulerService {
 
   createSchedule(
     { cron: cronExpression, keyword: keywordName }: { keyword: string; cron: string },
-    task: () => void
+    task: () => void | Promise<void>
   ) {
     if (!cron.validate(cronExpression)) {
       throw new Error(`Invalid cron expression: ${cronExpression}`);
@@ -17,7 +17,7 @@ class SchedulerService {
       this.schedules[keywordName].stop();
     }
 
-    const schedule = cron.schedule(cronExpression, task);
+    const schedule = cron.schedule(cronExpression, task, { noOverlap: true });
     this.schedules[keywordName] = schedule;
   }
 

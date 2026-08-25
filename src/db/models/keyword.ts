@@ -8,6 +8,7 @@ export interface KeywordDocument extends Document {
   enabled: boolean;
   targetUrls: string[];
   lastScrapedAt?: Date;
+  minIntentScore: number;
   createdAt: Date;
 }
 
@@ -24,6 +25,7 @@ const KeywordSchema = new Schema<KeywordDocument>({
     },
   },
   lastScrapedAt: { type: Date },
+  minIntentScore: { type: Number, default: 50, min: 0, max: 100 },
   createdAt: { type: Date, default: Date.now },
 });
 
