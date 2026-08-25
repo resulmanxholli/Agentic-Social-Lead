@@ -45,10 +45,6 @@ class RequestQueue {
 
   constructor(private readonly concurrency: number) {}
 
-  // Hands the freed slot directly to the next waiter instead of decrementing `active` and
-  // letting it be re-claimed by whoever calls run() next: decrementing here would leave a
-  // window, between this resolve() and the queued waiter's async function actually resuming,
-  // where a fresh caller could see a stale "slot free" count and slip in alongside it.
   private release() {
     const next = this.pending.shift();
     if (next) {

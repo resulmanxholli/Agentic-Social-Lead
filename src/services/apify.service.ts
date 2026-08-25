@@ -135,6 +135,7 @@ class ApifyService {
       `[apifyService] Comments run finished with status "${run.status}", dataset ${run.defaultDatasetId}`,
     );
 
+    // TODO: use onlyCommentsNewerThan, IMPORTANT!!!!!!!!!!!!!!!!!!!!!
     const { items } = await client.dataset(run.defaultDatasetId).listItems();
 
     console.log(`[apifyService] Raw comments dataset (${items.length} item(s)):`, items);

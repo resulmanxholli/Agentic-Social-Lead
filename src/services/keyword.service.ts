@@ -60,13 +60,15 @@ class KeywordService {
 
       const newPosts = await deduplicationService.filterNewPosts(posts, keywordDoc.keyword);
 
+      const relevantPosts = await this.qualifyPosts(newPosts, keywordDoc.keyword);
+
+
+      // OLDER POSTS THAT WERE PREVIOUSLY WATCHED, TO GET THEIR COMMENTS AS WELL
       const watchCutoff = new Date(Date.now() - POST_WATCH_WINDOW_DAYS * 24 * 60 * 60 * 1000);
       const previouslyWatchedPosts = await deduplicationService.getWatchedPosts(
         keywordDoc.keyword,
         watchCutoff,
       );
-
-      const relevantPosts = await this.qualifyPosts(newPosts, keywordDoc.keyword);
 
       const previouslyWatchedAsFacebookPosts: FacebookPost[] = previouslyWatchedPosts.map(
         (post) => ({
