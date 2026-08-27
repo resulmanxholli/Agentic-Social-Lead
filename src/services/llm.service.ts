@@ -133,10 +133,10 @@ class QualificationService {
           contents: `Tracked keyword: "${keyword}"\nPost text: "${post.text ?? ""}"`,
           config: {
             systemInstruction:
-              "You screen social media posts for a sales team. The team tracks the keyword/topic below " +
-              "because it signals buying intent for their product. A post's own author is never the lead — " +
-              "leads come from people who comment on relevant posts. Decide only whether this post's topic " +
-              "is likely to attract comments from people expressing genuine interest or intent related to the keyword.",
+              "You screen social media posts for a team tracking a keyword/topic. A post's own author is " +
+              "never the lead — leads come from people who comment on relevant posts. Decide only whether " +
+              "this post's topic is closely related to the tracked keyword, such that people commenting on " +
+              "it are likely to be genuinely engaged with or interested in that topic.",
             responseMimeType: "application/json",
             responseJsonSchema: PostRelevanceJsonSchema,
           },
@@ -175,10 +175,10 @@ class QualificationService {
           contents: `Tracked keyword: "${keyword}"\nAuthor's raw name: "${comment.author?.name ?? "unknown"}"\nComment text: "${comment.text ?? ""}"`,
           config: {
             systemInstruction:
-              "You qualify leads for a sales team by reading a single social media comment. " +
-              "The team tracks the keyword/topic below because it signals buying intent for their product. " +
-              "Score how likely this specific comment's author is a genuine, actionable sales lead, not spam, " +
-              "a job seeker, or a competitor. Extract only what the comment text actually states — never invent details.",
+              "You qualify leads by reading a single social media comment. A team tracks the keyword/topic " +
+              "below to find people genuinely engaged with or interested in that topic — not spam, bots, or " +
+              "irrelevant chatter. Score how likely this specific comment's author is a real, engaged person " +
+              "relevant to the keyword. Extract only what the comment text actually states — never invent details.",
             responseMimeType: "application/json",
             responseJsonSchema: QualificationJsonSchema,
           },
