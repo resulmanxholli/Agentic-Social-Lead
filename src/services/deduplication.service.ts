@@ -10,10 +10,6 @@ function parseDate(value?: string): Date | undefined {
 }
 
 class DeduplicationService {
-  hasKeywordInPost(post: FacebookPost, keyword: string): boolean {
-    const text = post.text ?? "";
-    return text.toLowerCase().includes(keyword.toLowerCase());
-  }
   async filterNewPosts(posts: FacebookPost[], keyword: string) {
     const postIds = posts
       .map((post) => post.postId)
@@ -24,9 +20,7 @@ class DeduplicationService {
     const existing = await Post.find({ postId: { $in: postIds } }).select("postId");
     const seenPostIds = new Set(existing.map((p) => p.postId));
 
-    return posts.filter((post) => {
-      return this.hasKeywordInPost(post, keyword) && (!post.postId || !seenPostIds.has(post.postId));
-    });
+    return posts.filter((post) => !post.postId || !seenPostIds.has(post.postId));
   }
 
   async recordPost(post: FacebookPost, keyword: string, isRelevant: boolean) {

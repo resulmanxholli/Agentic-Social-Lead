@@ -7,6 +7,8 @@ import { deduplicationService } from "./deduplication.service.js";
 import { leadService } from "./lead.service.js";
 
 const POST_WATCH_WINDOW_DAYS = Number(process.env.POST_WATCH_WINDOW_DAYS) || 7;
+const POSTS_RESULTS_LIMIT = Number(process.env.POSTS_RESULTS_LIMIT) || 1;
+const COMMENTS_RESULTS_LIMIT = Number(process.env.COMMENTS_RESULTS_LIMIT) || 10;
 
 class KeywordService {
   
@@ -53,9 +55,12 @@ class KeywordService {
 
       const posts = await apifyService.scrapeFacebookPosts(
         keywordDoc.targetUrls,
-        keywordDoc.lastScrapedAt
-          ? { onlyPostsNewerThan: keywordDoc.lastScrapedAt.toISOString() }
-          : {},
+        {
+          resultsLimit: POSTS_RESULTS_LIMIT,
+          ...(keywordDoc.lastScrapedAt
+            ? { onlyPostsNewerThan: keywordDoc.lastScrapedAt.toISOString() }
+            : {}),
+        },
       );
 
       const newPosts = await deduplicationService.filterNewPosts(posts, keywordDoc.keyword);
@@ -82,7 +87,9 @@ class KeywordService {
 
       const sweepTargets = [...relevantPosts, ...previouslyWatchedAsFacebookPosts];
 
-      const comments = await apifyService.scrapePostsComments(sweepTargets);
+      const comments = await apifyService.scrapePostsComments(sweepTargets, {
+        resultsLimit: COMMENTS_RESULTS_LIMIT,
+      });
 
       const newComments = await deduplicationService.filterNewComments(comments, keywordDoc.keyword);
       const fileteredComments = await deduplicationService.filterNewLeadsFromComments(
